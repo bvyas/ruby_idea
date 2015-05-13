@@ -1,0 +1,25 @@
+<p>Hello <%= @user.name%></p>
+
+<p><form action="/users/post" method="post">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<input type = "hidden" name="user_id" value="<%= @user.id %>">
+	Enter your comment here<input type="text" name="post">
+	<p><input type="submit" value="post"></p>
+</form></p>
+
+
+<% @posts.each do |post| %>
+					
+						<h3><%=post.user.name%></h3>
+						<p><%= post.post %></p>
+
+
+						<form action="/likes/create" method="post">
+							<input type = "hidden" name="post_id" value="<%=post.id %>">
+							<input type="submit" value="Like"></p>
+							<input name="authenticity_token" value="<%= form_authenticity_token %>"type="hidden">
+						</form>
+						<p><%= post.likes.count %></p>
+				<% end %>
+
+			
